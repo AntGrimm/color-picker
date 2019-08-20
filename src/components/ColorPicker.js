@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Slider from './Slider'
 
 export class ColorPicker extends Component {
   state = {
@@ -43,20 +44,11 @@ export class ColorPicker extends Component {
     return (
       <main>
         <h1>Choose a color!</h1>
-
         <section className="hsl-slider">
-          <section className="hue-slider">
-            <input
-              type="range"
-              className="hue"
-              min="0"
-              max="360"
-              onChange={this.saveUserInputHue}
-              value={this.state.hue}
-            />
-            {this.state.hue}
-          </section>
-
+          <Slider
+            hue={this.state.hue}
+            saveUserInputHue={this.saveUserInputHue}
+          />
           <section className="saturation-slider">
             <input
               type="range"
