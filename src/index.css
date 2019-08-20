@@ -20,3 +20,8 @@ main {
 .hsl-slider {
   min-width: 10rem;
 }
+
+.display-color-box {
+  display: flex;
+  align-items: center;
+}

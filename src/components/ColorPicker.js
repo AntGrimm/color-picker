@@ -2,16 +2,15 @@ import React, { Component } from 'react'
 
 export class ColorPicker extends Component {
   state = {
-    hue: 0,
-    saturation: 0,
-    lighting: 0
+    hue: Math.ceil(Math.random() * 360),
+    saturation: Math.ceil(Math.random() * 100),
+    lighting: Math.ceil(Math.random() * 100)
   }
 
   saveUserInputHue = event => {
     console.log(event.target.value)
     // track what the user drags on the slider
     this.setState({
-      userInputHue: event.target.value,
       hue: event.target.value
     })
   }
@@ -20,7 +19,6 @@ export class ColorPicker extends Component {
     console.log(event.target.value)
     // track what the user drags on the slider
     this.setState({
-      userInputSaturation: event.target.value,
       saturation: event.target.value
     })
   }
@@ -29,35 +27,48 @@ export class ColorPicker extends Component {
     console.log(event.target.value)
     // track what the user drags on the slider
     this.setState({
-      userInputLighting: event.target.value,
       lighting: event.target.value
+    })
+  }
+
+  updateRandomColor = () => {
+    this.setState({
+      hue: Math.ceil(Math.random() * 360),
+      saturation: Math.ceil(Math.random() * 100),
+      lighting: Math.ceil(Math.random() * 100)
     })
   }
 
   render() {
     return (
-      <section className="hsl-slider">
-        <section className="hue-slider">
-          <input
-            type="range"
-            className="hue"
-            min="0"
-            max="360"
-            onChange={this.saveUserInputHue}
-            value={this.state.userInputHue}
-          />
-          {this.state.hue}
-        </section>
-        <section className="saturation-slider">
-          <input
-            type="range"
-            className="saturation"
-            min="0"
-            max="100"
-            onChange={this.saveUserInputSaturation}
-            value={this.state.userInputSaturation}
-          />
-          {this.state.saturation}
+      <main>
+        <h1>Choose a color!</h1>
+
+        <section className="hsl-slider">
+          <section className="hue-slider">
+            <input
+              type="range"
+              className="hue"
+              min="0"
+              max="360"
+              onChange={this.saveUserInputHue}
+              value={this.state.hue}
+            />
+            {this.state.hue}
+          </section>
+
+          <section className="saturation-slider">
+            <input
+              type="range"
+              className="saturation"
+              min="0"
+              max="100"
+              onChange={this.saveUserInputSaturation}
+              value={this.state.saturation}
+            />
+            {this.state.saturation}
+          </section>
+
           <section className="lighting-slider">
             <input
               type="range"
@@ -65,12 +76,30 @@ export class ColorPicker extends Component {
               min="0"
               max="100"
               onChange={this.saveUserInputLighting}
-              value={this.state.userInputLighting}
+              value={this.state.lighting}
             />
             {this.state.lighting}
           </section>
         </section>
-      </section>
+
+        <button className="random-color" onClick={this.updateRandomColor}>
+          Random Color
+        </button>
+
+        <div className="display-color-box">
+          HSL: {this.state.hue}, {this.state.saturation}%, {this.state.lighting}
+          %
+          <p
+            style={{
+              backgroundColor: `hsl(${this.state.hue}, ${
+                this.state.saturation
+              }%, ${this.state.lighting}%)`,
+              height: 50,
+              width: 50
+            }}
+          />
+        </div>
+      </main>
     )
   }
 }
