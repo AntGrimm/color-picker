@@ -1,9 +1,15 @@
 import React, { Component } from 'react'
-import HelloWorld from './components/HelloWorld'
+import ColorPicker from './components/ColorPicker'
 
 class App extends Component {
   render() {
-    return <HelloWorld />
+    console.log('rendering')
+    return (
+      <main>
+        <h1>HSL Color Picker</h1>
+        <ColorPicker />
+      </main>
+    )
   }
 }
 
